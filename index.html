@@ -1,93 +1,100 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
+    <title>School Card Access</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>School Info</title>
 
     <style>
         body {
             margin: 0;
-            font-family: Arial, sans-serif;
-            background: linear-gradient(135deg, #0f172a, #1e293b);
+            font-family: Arial;
+            background: #0f172a;
             color: white;
             text-align: center;
         }
 
-        .container {
-            padding: 20px;
-            max-width: 500px;
-            margin: auto;
+        .box {
+            margin-top: 100px;
         }
 
-        .card {
-            background: rgba(255,255,255,0.05);
-            padding: 20px;
-            border-radius: 15px;
-            box-shadow: 0 0 20px rgba(0,0,0,0.3);
-        }
-
-        h1 {color: gold;}
-        h2 {color: gold;}
-
-        .info {
-            margin: 10px 0;
+        input {
             padding: 10px;
-            background: rgba(255,255,255,0.08);
-            border-radius: 8px;
+            margin: 10px;
+            width: 200px;
         }
 
-        .label {
-            font-weight: bold;
-            color: #38bdf8;
+        button {
+            padding: 10px 20px;
+            background: gold;
+            border: none;
+            cursor: pointer;
         }
 
-        footer {
-            margin-top: 20px;
-            font-size: 12px;
-            opacity: 0.7;
+        #card {
+            display: none;
+            margin-top: 50px;
         }
     </style>
 </head>
 <body>
 
-<div class="container">
-    <div class="card">
+<!-- LOGIN -->
+<div id="login" class="box">
+    <h1>⚠️ Access Notice</h1>
+    <p>Your name will be recorded before access</p>
 
-        <h1>🏫 Dr. Virendra Swaroop Education Centre, Fbd</h1><BR>
-        <h2> The Property You've Got Belongs to-</h2>
-        
-
-        <div class="info">
-            <span class="label">Student Name:</span> Krishnam Arora
-        </div>
-
-        <div class="info">
-            <span class="label">Class:</span> 10th
-        </div>
-
-        <div class="info">
-            <span class="label">Section:</span> C
-        </div>
-
-        <div class="info">
-            <span class="label">Roll Number:</span> 24
-        </div>
-
-        <div class="info">
-            <span class="label">School Address:</span> Chandpur, Farrukhabad- 209625
-        </div>
-
-        <div class="info">
-            <span class="label">Contact:</span> +91 8960145110
-        </div>
-
-    </div>
-
-    <footer>
-        © 2026 School Info Card
-    </footer>
+    <input id="username" placeholder="Enter your name">
+    <br>
+    <button onclick="login()">Enter</button>
 </div>
+
+<!-- CARD -->
+<div id="card">
+    <h1>🎫 School Card</h1>
+    <h2 id="welcome"></h2>
+    <p>Welcome to your digital card</p>
+</div>
+
+<script>
+async function login() {
+    const name = document.getElementById("username").value;
+
+    if (!name.trim()) {
+        alert("Enter your name!");
+        return;
+    }
+
+    // SAVE TO GOOGLE SHEETS
+    try {
+        await fetch("YOUR_GOOGLE_SCRIPT_URL", {
+            method: "POST",
+            body: JSON.stringify({ name })
+        });
+    } catch (e) {
+        console.log("Sheet error (ignore if testing)");
+    }
+
+    // SAVE LOCALLY
+    localStorage.setItem("user", name);
+
+    showCard(name);
+}
+
+// SHOW CARD
+function showCard(name) {
+    document.getElementById("login").style.display = "none";
+    document.getElementById("card").style.display = "block";
+
+    document.getElementById("welcome").innerText =
+        "Welcome " + name;
+}
+
+// AUTO LOGIN
+const savedUser = localStorage.getItem("user");
+if (savedUser) {
+    showCard(savedUser);
+}
+</script>
 
 </body>
 </html>
