@@ -62,8 +62,15 @@ if (!user) {
 
 <div class="container">
     <div class="card">
+        <h3 id="welcome"></h3>
+
+<script>
+document.getElementById("welcome").innerText =
+    "Welcome " + localStorage.getItem("user");
+</script>
 
         <h1>🏫 Dr. Virendra Swaroop Education Centre</h1>
+    
 
         <div class="info">
             <span class="label">Student Name:</span> Krishnam ARORA 
