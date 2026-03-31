@@ -53,6 +53,10 @@
 </head>
 <body>
     <script>
+        const user = sessionsStorage.getItem("user");
+        if (!user) {
+            window.location.href = "login.html";
+        }
     </script>
 
 <div class="container">
@@ -90,6 +94,13 @@ document.getElementById("welcome").innerText =
         <div class="info">
             <span class="label">Contact:</span> +91 8960145110
         </div>
+        <button onclick="logout()">Log Out</button>
+        <script>
+            function logout() {
+                sessionStorage.clear();
+                window.location.href = "login.html";
+            }
+        </script>
 
     </div>
 
