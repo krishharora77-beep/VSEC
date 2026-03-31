@@ -17,6 +17,7 @@
         .container {
             padding: 20px;
             max-width: 500px;
+            max-height: 500px;
             margin: auto;
         }
 
@@ -51,14 +52,21 @@
     </style>
 </head>
 <body>
+    <script>
+const user = localStorage.getItem("user");
+
+if (!user) {
+    window.location.href = "login.html";
+}
+    </script>
 
 <div class="container">
     <div class="card">
 
-        <h1>🏫 Your School Name</h1>
+        <h1>🏫 Dr. Virendra Swaroop Education Centre</h1>
 
         <div class="info">
-            <span class="label">Student Name:</span> Your Name
+            <span class="label">Student Name:</span> Krishnam ARORA 
         </div>
 
         <div class="info">
@@ -66,19 +74,19 @@
         </div>
 
         <div class="info">
-            <span class="label">Section:</span> A
+            <span class="label">Section:</span> C
         </div>
 
         <div class="info">
-            <span class="label">Roll Number:</span> 23
+            <span class="label">Roll Number:</span> 24
         </div>
 
         <div class="info">
-            <span class="label">School Address:</span> Your School Address
+            <span class="label">School Address:</span> Chandpur, Farrukhabad-209625
         </div>
 
         <div class="info">
-            <span class="label">Contact:</span> +91 XXXXX XXXXX
+            <span class="label">Contact:</span> +91 8960145110
         </div>
 
     </div>
