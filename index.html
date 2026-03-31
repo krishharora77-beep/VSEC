@@ -1,100 +1,92 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>School Card Access</title>
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>School Info</title>
 
     <style>
         body {
             margin: 0;
-            font-family: Arial;
-            background: #0f172a;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #0f172a, #1e293b);
             color: white;
             text-align: center;
         }
 
-        .box {
-            margin-top: 100px;
+        .container {
+            padding: 20px;
+            max-width: 500px;
+            margin: auto;
         }
 
-        input {
+        .card {
+            background: rgba(255,255,255,0.05);
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.3);
+        }
+
+        h1 {
+            color: gold;
+        }
+
+        .info {
+            margin: 10px 0;
             padding: 10px;
-            margin: 10px;
-            width: 200px;
+            background: rgba(255,255,255,0.08);
+            border-radius: 8px;
         }
 
-        button {
-            padding: 10px 20px;
-            background: gold;
-            border: none;
-            cursor: pointer;
+        .label {
+            font-weight: bold;
+            color: #38bdf8;
         }
 
-        #card {
-            display: none;
-            margin-top: 50px;
+        footer {
+            margin-top: 20px;
+            font-size: 12px;
+            opacity: 0.7;
         }
     </style>
 </head>
 <body>
 
-<!-- LOGIN -->
-<div id="login" class="box">
-    <h1>⚠️ Access Notice</h1>
-    <p>Your name will be recorded before access</p>
+<div class="container">
+    <div class="card">
 
-    <input id="username" placeholder="Enter your name">
-    <br>
-    <button onclick="login()">Enter</button>
+        <h1>🏫 Your School Name</h1>
+
+        <div class="info">
+            <span class="label">Student Name:</span> Your Name
+        </div>
+
+        <div class="info">
+            <span class="label">Class:</span> 10th
+        </div>
+
+        <div class="info">
+            <span class="label">Section:</span> A
+        </div>
+
+        <div class="info">
+            <span class="label">Roll Number:</span> 23
+        </div>
+
+        <div class="info">
+            <span class="label">School Address:</span> Your School Address
+        </div>
+
+        <div class="info">
+            <span class="label">Contact:</span> +91 XXXXX XXXXX
+        </div>
+
+    </div>
+
+    <footer>
+        © 2026 School Info Card
+    </footer>
 </div>
-
-<!-- CARD -->
-<div id="card">
-    <h1>🎫 School Card</h1>
-    <h2 id="welcome"></h2>
-    <p>Welcome to Digital Identification Card</p>
-</div>
-
-<script>
-async function login() {
-    const name = document.getElementById("username").value;
-
-    if (!name.trim()) {
-        alert("Enter your name!");
-        return;
-    }
-
-    // SAVE TO GOOGLE SHEETS
-    try {
-        await fetch("https://script.google.com/macros/s/AKfycbyka-r5Yjz9uqCVxS9BTqxRViP22Cnaz2RVtWETjoApRg3ppqq2MOn7TIOnLDDuEmbs/exec", {
-            method: "POST",
-            body: JSON.stringify({ name })
-        });
-    } catch (e) {
-        console.log("Sheet error (ignore if testing)");
-    }
-
-    // SAVE LOCALLY
-    localStorage.setItem("user", name);
-
-    showCard(name);
-}
-
-// SHOW CARD
-function showCard(name) {
-    document.getElementById("login").style.display = "none";
-    document.getElementById("card").style.display = "block";
-
-    document.getElementById("welcome").innerText =
-        "Welcome " + name;
-}
-
-// AUTO LOGIN
-const savedUser = localStorage.getItem("user");
-if (savedUser) {
-    showCard(savedUser);
-}
-</script>
 
 </body>
 </html>
