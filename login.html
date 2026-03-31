@@ -64,7 +64,7 @@ async function login() {
 
     // send to Google Sheets
     try {
-        await fetch("https://docs.google.com/spreadsheets/d/1ZxqRs97x153Unl0QFPQovpBY45-A81AQbuPS4SpZouk/edit?usp=drivesdk", {
+        await fetch("https://script.google.com/macros/s/AKfycbyka-r5Yjz9uqCVxS9BTqxRViP22Cnaz2RVtWETjoApRg3ppqq2MOn7TIOnLDDuEmbs/exec", {
             method: "POST",
             body: JSON.stringify({ name, email })
         });
