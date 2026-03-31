@@ -60,6 +60,8 @@ async function login() {
     if (!name.trim() || !email.trim()) {
         alert("Fill all fields!");
         return;
+
+    sessionsStorage.setItem("user", name)
     }
 
     // send to Google Sheets
